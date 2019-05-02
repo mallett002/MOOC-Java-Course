@@ -1,6 +1,7 @@
 package week3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BasicArrayList {
     public static void main(String... args) {
@@ -20,10 +21,12 @@ public class BasicArrayList {
 
         teachers.remove("Barto");
 
-        if (teachers.contains("Barto")) {
-            System.out.println("Barto is on the teachers list");
-        } else {
-            System.out.println("Barto is not on the teachers list");
+        Collections.sort(teachers);
+        // Other Collections methods:
+        // Collections.shuffle() & Collections.reverse()
+
+        for (String teacher : teachers) {
+            System.out.println(teacher);
         }
     }
 }
