@@ -25,8 +25,6 @@ public class Main {
             System.out.println( bob.getName() + " is a minor" );
         }
 
-        bob.printPerson();
-
         // Calling Person.toString method
         System.out.println(andy); // java calls it as "System.out.println(andy.toString()); during runtime
         System.out.println(bob);
@@ -41,7 +39,7 @@ public class Main {
         marcela.setHeight(175);
         marcela.setWeight(64);
 
-        System.out.println(will.getName() + ", body mass index: " + will.generateBodyMassIndex());
-        System.out.println(marcela.getName() + ", body mass index: " + marcela.generateBodyMassIndex());
+        System.out.println(will.getName() + ", body mass index: " + String.format("%.2f", will.generateBodyMassIndex()));
+        System.out.println(marcela.getName() + ", body mass index: " + String.format("%.2f", marcela.generateBodyMassIndex()));
     }
 }

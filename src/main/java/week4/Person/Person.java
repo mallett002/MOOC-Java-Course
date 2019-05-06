@@ -38,13 +38,10 @@ public class Person {
         return this.name;
     }
 
-    public void printPerson() {
-        System.out.println(this.name + ", age " + this.age + " years");
-    }
-
     public String toString() {
-        return this.name + ", age " + this.age + " years";
+        return this.name + ", age " + this.age + " years, my body mass index is " + this.generateBodyMassIndex();
     }
+    // could call this.generateBodyMassIndex without "this" keyword
 
     public boolean isAdult() {
         return this.age >= 18;
