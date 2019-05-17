@@ -1,4 +1,4 @@
-package week5;
+package week5.Person;
 
 public class Person {
     private String name;
@@ -19,6 +19,13 @@ public class Person {
         this.height = 0;
     }
 
+    public Person(String name, int age, int height, int weight) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.height = height;
+    }
+
     public void setHeight(int newHeight) {
         this.height = newHeight;
     }
@@ -27,10 +34,14 @@ public class Person {
         this.weight = newWeight;
     }
 
-    public double generateBodyMassIndex() {
+    public double weightIndex() {
         if (getWeight() == 0 || getHeight() == 0) return (double) 0;
         double heightInMeters = getHeight() / 100.0;
         return (double) getWeight() / (heightInMeters*heightInMeters);
+    }
+
+    public boolean olderThan(Person compared) {
+        return this.age > compared.age; // Private var accessed bc Person class contains the method
     }
 
     public void becomeOlder() {
@@ -59,7 +70,7 @@ public class Person {
     }
 
     public String toString() {
-        return getName() + ", age " + getAge() + " years, body mass index is " + String.format("%.3f",generateBodyMassIndex());
+        return getName() + ", age " + getAge() + " years, body mass index is " + String.format("%.3f",weightIndex());
     }
 
     public boolean isAdult() {
