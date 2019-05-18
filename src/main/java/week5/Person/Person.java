@@ -1,17 +1,18 @@
 package week5.Person;
 
+import week5.Dates.MyDate;
+
 public class Person {
     private String name;
     private int age;
     private int height;
     private int weight;
+    private MyDate myBirthDate;
 
-    // First constructor
     public Person(String name) {
         this(name, 0); // calling second constructor
     }
 
-    // Second constructor (distinguished by args)
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
@@ -19,11 +20,11 @@ public class Person {
         this.height = 0;
     }
 
-    public Person(String name, int age, int height, int weight) {
+    public Person(String name, int day, int month, int year) {
         this.name = name;
-        this.age = age;
-        this.weight = weight;
-        this.height = height;
+        this.weight = 0;
+        this.height = 0;
+        this.myBirthDate = new MyDate(day, month, year);
     }
 
     public void setHeight(int newHeight) {
@@ -69,8 +70,12 @@ public class Person {
         return this.weight;
     }
 
+//    public String toString() {
+//        return getName() + ", age " + getAge() + " years, body mass index is " + String.format("%.3f",weightIndex());
+//    }
+
     public String toString() {
-        return getName() + ", age " + getAge() + " years, body mass index is " + String.format("%.3f",weightIndex());
+        return this.name + ", born " + this.myBirthDate; // calls toString of MyDate class
     }
 
     public boolean isAdult() {

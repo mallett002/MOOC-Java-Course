@@ -1,6 +1,7 @@
 package week5.Person;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Program {
     public static void main(String... args) {
@@ -59,27 +60,39 @@ public class Program {
 //        System.out.println("total weights measured: " + reform.totalWeightsMeasured());
 
         // Working with ArrayLists--------------------------------------------------------------------------------------
-        ArrayList<Person> teachers = new ArrayList<>();
-        // We can take a person into a variable and add it to the list
-        Person teacher = new Person("Juhana");
-        teachers.add(teacher);
+//        ArrayList<Person> teachers = new ArrayList<>();
+//        // We can take a person into a variable and add it to the list
+//        Person teacher = new Person("Juhana");
+//        teachers.add(teacher);
+//
+//        // Or can create it and add it at same time
+//        teachers.add(new Person("Matti"));
+//        teachers.add(new Person("Martin"));
+//
+//        System.out.println("teachers as newborns: ");
+//        for (Person prs : teachers) {
+//            System.out.println(prs);
+//        }
+//
+//        for (Person prs : teachers) {
+//            prs.becomeOlder(30);
+//        }
+//
+//        System.out.println("in 30 years: ");
+//        for (Person prs : teachers) {
+//            System.out.println(prs);
+//        }
 
-        // Or can create it and add it at same time
-        teachers.add(new Person("Matti"));
-        teachers.add(new Person("Martin"));
+        // Working with Object within object
+        Person martin = new Person("Martin", 24, 4, 1983);
+        Person juhana = new Person("Juhana", 17, 9, 1985);
+        System.out.println(martin);
+        System.out.println(juhana);
 
-        System.out.println("teachers as newborns: ");
-        for (Person prs : teachers) {
-            System.out.println(prs);
-        }
-
-        for (Person prs : teachers) {
-            prs.becomeOlder(30);
-        }
-
-        System.out.println("in 30 years: ");
-        for (Person prs : teachers) {
-            System.out.println(prs);
-        }
+        // Working with dates in java
+        int day = Calendar.getInstance().get(Calendar.DATE);
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        System.out.println("Today is " + day + "." + month + "." + year);
     }
 }
