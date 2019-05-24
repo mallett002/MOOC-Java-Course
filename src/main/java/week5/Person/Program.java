@@ -83,16 +83,35 @@ public class Program {
 //            System.out.println(prs);
 //        }
 
-        // Working with Object within object
-        Person martin = new Person("Martin", 24, 4, 1983);
-        Person juhana = new Person("Juhana", 17, 9, 1985);
-        System.out.println(martin);
-        System.out.println(juhana);
+        // Working with Object within object----------------------------------------------------------------------------
+//        Person martin = new Person("Martin", 24, 4, 1983);
+//        Person juhana = new Person("Juhana", 17, 9, 1985);
+//        System.out.println(martin);
+//        System.out.println(juhana);
+//
+//        // Working with dates in java---------------------------------------------------------------------------------
+//        int day = Calendar.getInstance().get(Calendar.DATE);
+//        int month = Calendar.getInstance().get(Calendar.MONTH);
+//        int year = Calendar.getInstance().get(Calendar.YEAR);
+//        System.out.println("Today is " + day + "." + month + "." + year);
 
-        // Working with dates in java
-        int day = Calendar.getInstance().get(Calendar.DATE);
-        int month = Calendar.getInstance().get(Calendar.MONTH);
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        System.out.println("Today is " + day + "." + month + "." + year);
+        // Working with new WeightWatchersAssociation-------------------------------------------------------------------
+        WeightWatchersAssociation weightWatcher = new WeightWatchersAssociation("Kumpulan Paino", 25);
+
+        Person matti = new Person("Matti");
+        matti.setWeight(86);
+        matti.setHeight(180);
+        weightWatcher.addAsMember(matti);
+
+        Person juhana = new Person("Juhana");
+        juhana.setWeight(64);
+        juhana.setHeight(172);
+        weightWatcher.addAsMember(juhana);
+
+        System.out.println(weightWatcher);
+
+        Person heaviest = weightWatcher.personWithHighestWeightIndex();
+        System.out.println("member with the greatest weight index: " + heaviest.getName());
+        System.out.println("weight index " + String.format("%.2f", heaviest.weightIndex()));
     }
 }
