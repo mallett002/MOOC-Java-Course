@@ -1,6 +1,6 @@
 package week8.Factory;
 
-public class CD implements ToBeStored {
+public class CD implements ToBeStored, Item {
     private String artist;
     private String title;
     private int publishingYear;

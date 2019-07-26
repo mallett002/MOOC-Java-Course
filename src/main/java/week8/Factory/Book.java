@@ -1,8 +1,6 @@
 package week8.Factory;
 
-import week8.Factory.ToBeStored;
-
-public class Book implements ToBeStored {
+public class Book implements ToBeStored, Item {
     private String writer;
     private String name;
     private double weight;
