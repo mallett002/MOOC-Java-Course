@@ -2,6 +2,7 @@ package week8.SortingCards;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Hand implements Comparable<Hand> {
     private ArrayList<Card> cardList;
@@ -43,5 +44,10 @@ public class Hand implements Comparable<Hand> {
 
     public ArrayList<Card> getCardList() {
         return this.cardList;
+    }
+
+    public void sortAgainstSuit() {
+        SortAgainstSuitAndValue suitSorter = new SortAgainstSuitAndValue();
+        Collections.sort(cardList, suitSorter);
     }
 }
