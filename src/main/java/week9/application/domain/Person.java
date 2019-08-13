@@ -1,7 +1,5 @@
 package week9.application.domain;
 
-import java.util.Comparator;
-
 public class Person implements Identifiable, Comparable<Identifiable> {
     private String name;
     private String id;

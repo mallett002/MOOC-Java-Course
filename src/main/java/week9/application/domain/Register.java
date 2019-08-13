@@ -1,9 +1,6 @@
 package week9.application.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Register {
     private HashMap<String, Identifiable> registered;
@@ -22,11 +19,5 @@ public class Register {
 
     public List<Identifiable> getAll() {
         return new ArrayList<Identifiable>(registered.values());
-    }
-
-    public List<Identifiable> sortAndGetEverything() {
-        ArrayList<Identifiable> all = new ArrayList<Identifiable>(registered.values());
-        Collections.sort(all);
-        return all;
     }
 }
