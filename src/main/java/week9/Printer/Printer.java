@@ -12,7 +12,7 @@ public class Printer {
     }
 
     public void printLinesWhichContain(String word) throws Exception {
-        if (word.length() == 0) {
+        if (word.isEmpty()) {
             throw new IllegalArgumentException("You must provide a word");
         } else {
             this.reader = new Scanner(this.file);
