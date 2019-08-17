@@ -40,6 +40,7 @@ public class Thermometer implements Sensor {
             if (temp != 0) {
                 return temp * negativeOrNot[negOrPosIndex];
             }
+
             return temp;
         } else {
             throw new IllegalStateException("Thermometer is turned off.");

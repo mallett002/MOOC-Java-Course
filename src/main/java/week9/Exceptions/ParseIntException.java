@@ -25,6 +25,7 @@ public class ParseIntException {
                 return num;
             } catch (Exception e) {
                 System.out.println("You haven't written a proper number.");
+                e.printStackTrace();
             }
         }
     }

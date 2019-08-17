@@ -15,7 +15,10 @@ public class ThrowingExceptions {
         try {
             int num = Integer.parseInt(reader.nextLine());
         } catch (Exception e) {
-            throw new NumberFormatException();
+//            throw new NumberFormatException();
+
+            // Exception class has useful methods
+            e.printStackTrace();
         }
 
         // *** IllegalArgumentException ***
