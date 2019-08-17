@@ -25,10 +25,23 @@ public class Main {
         reader.close();                         // close the file
 
         // *** Print every 5th word ***
+        String pathToExceptionText = "C:\\bench\\MOOC\\src\\main\\java\\week9\\FileReading\\exceptions.txt";
         FileReader fileReader = new FileReader();
-        File exceptionsText = new File("C:\\bench\\MOOC\\src\\main\\java\\week9\\FileReading\\exceptions.txt");
+        File exceptionsText = new File(pathToExceptionText);
 
         fileReader.printEveryFifth(exceptionsText); // main() throws Exception handles the Exception
+
+        // *** Character set ***
+        // Java needs character set for:
+            // - saving text to hard disk in binary
+            // - retrieving and translating binary data into text
+
+        // Create a Scanner that reads a file using UTF-8:
+        File f = new File(pathToExceptionText); // make the file
+        Scanner scanner = new Scanner(f, "UTF-8"); // pass UTF-8 to Scanner
+
+        // Can also set env var JAVA_TOOL_OPTIONS to -Dfile.encoding=UTF8
+        // Then java will always use UTF-8
 
     }
 }
