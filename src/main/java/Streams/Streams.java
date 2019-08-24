@@ -23,7 +23,7 @@ Stream Pipeline-----------------------------------------------------------------
  - forEach(): applies the same function to each element
  - collect(): saves the elements into a colleciton
  - other options: reduce stream to a single summary element
-    - count(), max(), min(), reduce(), summaryStatistics()
+    - count(), max(), min(), reduce(), summaryStatistics(), ifPresent()
 */
 
 
