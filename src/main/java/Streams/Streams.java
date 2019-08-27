@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 Stream Pipeline---------------------------------------------------------------------------------------------------------
 
 *** Source ***
- - Created from Collections, Lists, Sets, ints, longs, doubles, arrays, lines of a file
+ - Created from Collections, Lists, ExerciseAccounting, ints, longs, doubles, arrays, lines of a file
 
 *** 0 or more Intermediate operations ***
  - filter(), map(), sort(), anyMatch(), distinct(), findFirst(), flatMap(), map(), skip(), sorted()
