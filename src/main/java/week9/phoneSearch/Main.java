@@ -1,8 +1,6 @@
 package week9.phoneSearch;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -14,7 +12,7 @@ public class Main {
         reader = new Scanner(System.in);
 
         printUserInterface();
-        hydrateContacts();
+        populateContacts();
         startProgram();
     }
 
@@ -38,7 +36,11 @@ public class Main {
             } else if (input.equals("6")) {
                 deletePersonalInfo();
             } else if (input.equals("7")) {
-                System.out.println("You entered " + input);
+                searchByKeyWord();
+            } else if (input.equals("8")) {
+                createContact();
+            } else if (input.equals("9")) {
+                deleteContact();
             } else if (input.equals("x")) {
                 break;
             } else {
@@ -49,7 +51,7 @@ public class Main {
 
     public static void printUserInterface() {
         System.out.println(
-            "phone search\n" +
+            "Contact Listings\n" +
             "available operations\n" +
             " 1 add a number\n" +
             " 2 search for a number\n" +
@@ -57,12 +59,14 @@ public class Main {
             " 4 add an address\n" +
             " 5 search for personal information\n" +
             " 6 delete personal information\n" +
-            " 7 filtered listing\n" +
+            " 7 search by keyword\n" +
+            " 8 add contact\n" +
+            " 9 remove contact by name\n" +
             " x quit"
         );
     }
 
-    public static void hydrateContacts() {
+    public static void populateContacts() {
         // Create people
         contacts.addPerson("Will");
         contacts.addPerson("Marcela");
@@ -145,14 +149,19 @@ public class Main {
         String name = reader.nextLine();
 
         Person person = contacts.getPerson(name);
-        String[] streetAndCity = person.getAddress();
-        Set<String> phoneNumbers = person.getNumbers();
 
+        String address = buildAddressString(person);
+        String numbers = buildNumbersString(person);
+
+        System.out.println(address + "\n" + numbers);
+    }
+
+    public static String buildAddressString(Person person) {
+        String[] streetAndCity = person.getAddress();
         Boolean noAddress = streetAndCity.length != 2 ||
                 streetAndCity[0] == null ||
                 streetAndCity[1] == null;
 
-        // Build the address string
         String address = "address: ";
         if (noAddress) {
             address = "address unknown";
@@ -162,7 +171,11 @@ public class Main {
                     .collect(Collectors.joining(" "));
         }
 
-        // build the phone numbers string
+        return address;
+    }
+
+    public static String buildNumbersString(Person person) {
+        Set<String> phoneNumbers = person.getNumbers();
         String phoneNumbersToString = phoneNumbers.stream()
                 .collect(Collectors.joining("\n"));
 
@@ -173,9 +186,7 @@ public class Main {
             numbers += phoneNumbersToString;
         }
 
-        // Print address and string together
-        System.out.println(address + "\n" +
-                numbers);
+        return numbers;
     }
 
     public static void deletePersonalInfo() {
@@ -187,6 +198,51 @@ public class Main {
             System.out.println("Personal info for " + name + " has been removed.");
         } else {
             System.out.println("There was an error removing information for " + name);
+        }
+    }
+
+    public static void searchByKeyWord() {
+        System.out.print("\n" + "keyword (if empty, all listed): ");
+        String keyword = reader.nextLine();
+        Set<Person> found = contacts.findPeopleByKeyword(keyword);
+
+        System.out.println("found contacts:");
+
+        if (found.isEmpty()) {
+            System.out.println("No contacts were found with that keyword");
+        } else {
+            found.stream()
+                    .sorted(Comparator.comparing(Person::getName))
+                    .forEach(person -> {
+                        String name = person.getName();
+                        String address = buildAddressString(person);
+                        String numbers = buildNumbersString(person);
+                        System.out.println(name + "\n" + address + "\n" + numbers + "\n");
+                    });
+        }
+    }
+
+    public static void createContact() {
+        System.out.print("name: ");
+        String name = reader.nextLine();
+
+        Boolean isPersonCreated = contacts.addPerson(name);
+        if (isPersonCreated) {
+            System.out.println("Succesfully created " + name);
+        } else {
+            System.out.println("There was an error creating " + name);
+        }
+    }
+
+    public static void deleteContact() {
+        System.out.print("remove contact by which name: ");
+        String name = reader.nextLine();
+
+        Boolean isPersonDeleted = contacts.removePerson(name);
+        if (isPersonDeleted) {
+            System.out.println("Succesfully removed " + name);
+        } else {
+            System.out.println("There was an error removing " + name);
         }
     }
 }

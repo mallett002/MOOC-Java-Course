@@ -1,9 +1,6 @@
 package week9.phoneSearch;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Contacts {
     private Map<String, Person> people;
@@ -20,67 +17,46 @@ public class Contacts {
         return this.people;
     }
 
-    public void addPerson(String name) {
-        this.people.put(name, new Person(name));
+    public boolean addPerson(String name) {
+        try {
+            this.people.put(name, new Person(name));
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
     }
 
-//    public Set<String> getNumber(String name) {
-//        return this.numbers.get(name);
-//    }
+    public boolean removePerson(String name) {
+        try {
+            this.people.remove(name);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+    }
 
-//    public String getPersonByNumber(String number) {
-//        String person = "Unknown";
-//
-//        for (String name : this.numbers.keySet()) {
-//            Set<String> personsNumbers = this.numbers.get(name);
-//
-//            for (String possibleNumber : personsNumbers) {
-//                if (possibleNumber.equals(number)) {
-//                    person = name;
-//                }
-//            }
-//        }
-//
-//        return person;
-//    }
-//
-//    public void addAddress(String name, String street, String city) {
-//        if (!this.addresses.containsKey(name)) {
-//            this.addresses.put(name, new HashSet<>());
-//        }
-//
-//        Set<String> address = this.addresses.get(name);
-//        address.add(street);
-//        address.add(city);
-//    }
-//
-//    public String getPersonalInfo(String name) {
-//        String addressString = "";
-//        String numbersString = "";
-//
-//        if (!this.addresses.containsKey(name)) {
-//            addressString = "address unknown";
-//        }
-//
-//        if (!this.numbers.containsKey(name)) {
-//            numbersString = "numbers unknown";
-//        }
-//
-//        Object[] personsAddress = this.addresses.get(name).toArray();
-//        Set<String> personsNumbers = this.numbers.get(name);
-//
-//        String street = personsAddress[1].toString();
-//        String city = personsAddress[0].toString();
-//
-//        addressString = street + " " + city;
-//
-//        for (String number : personsNumbers) {
-//            numbersString += number + "\n";
-//        }
-//
-//        return "address: " + addressString + ", " + "\n"
-//                + "phone numbers:\n"
-//                + numbersString;
-//    }
+    public Set<Person> findPeopleByKeyword(String keyword) {
+        Set<Person> found = new HashSet<>();
 
+        this.people.keySet()
+                .forEach(name -> {
+                    if (name.toLowerCase().contains(keyword.toLowerCase())) {
+                        found.add(people.get(name));
+                    }
+                    else {
+                        Arrays.asList(people.get(name).getAddress())
+                                .stream()
+                                .forEach(item -> {
+                                    if (item != null) {
+                                        if (item.toLowerCase().contains(keyword.toLowerCase())) {
+                                            found.add(people.get(name));
+                                        }
+                                    }
+                                });
+                    }
+                });
+
+        return found;
+
+    }
 }

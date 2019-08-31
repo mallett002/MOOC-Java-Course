@@ -23,6 +23,10 @@ public class Person {
         return this.numbers;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void addAddress(String street, String city) {
         this.address[0] = street;
         this.address[1] = city;
@@ -35,7 +39,7 @@ public class Person {
     public boolean clearPersonalInfo() {
         try {
             this.numbers.clear();
-            Arrays.fill(this.address, null);
+            Arrays.fill(this.address, "");
             return true;
         } catch (Exception ex) {
             return false;
