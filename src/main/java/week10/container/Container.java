@@ -52,6 +52,9 @@ public class Container {
     }
 
     public String toString() {
-        return "volume = " + getVolume() + ", free space " + getCurrentCapacity();
+        return "volume = " +
+                String.format("%.2f", getVolume()) +
+                ", free space " +
+                String.format("%.2f", getCurrentCapacity());
     }
 }
