@@ -36,6 +36,16 @@ public class Main {
         people.add(new Student("Olli", "Ida Albergintie Street 1 00400 Helsinki"));
 
         printDepartment(people);
+
+        // Person type only has methods defined in Person class
+        Person will = new Student("Will", "Ida Albergintie Street 1 00400 Helsinki");
+        System.out.println(will);
+        Person Tony = new Student("Tony", "Ida Albergintie Street 1 00400 Helsinki");
+        System.out.println( olli ); // calls Student's toString
+
+        Object liisa = new Student("Lisa", "Väinö Auerin Street 20 00500 Helsinki");
+        System.out.println( liisa ); // calls Student's toString
+
     }
 
     public static void printDepartment(List<Person> people) {
