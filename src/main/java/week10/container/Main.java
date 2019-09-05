@@ -9,6 +9,6 @@ public class Main {
         juice.addToTheContainer(1.0);
         System.out.println(juice);
 
-        // Exercise 30.5 Container history Phase 3
+//        Exercise 30.6: Product Container Recorder, Phase 1
     }
 }
