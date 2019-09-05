@@ -6,8 +6,9 @@ public class Main {
         juice.addToTheContainer(1000.0);
         juice.takeFromTheContainer(11.3);
         System.out.println(juice.getName());
+        juice.addToTheContainer(1.0);
         System.out.println(juice);
 
-        // Exercise 30.2: Product Container, Phase 2
+        // Exercise 30.5 Container history Phase 3
     }
 }
