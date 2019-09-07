@@ -36,7 +36,6 @@ public class Barn {
 
     // fill barn's tank with milk of many cows
     public void takeCareOf(Collection<Cow> cows) {
-        // Collections.forEach method:
         cows.forEach(this::takeCareOf);
     }
 
