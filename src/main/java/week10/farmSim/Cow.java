@@ -4,10 +4,12 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Cow implements Milkable, Alive {
+    // Specific to this cow
     private final String cowName;
     private final double udderCapacity;
     private double milkAmount;
 
+    // Utils
     private final int UDDER_MIN = 15;
     private final int UDDER_MAX = 40;
     private final Random random = new Random();

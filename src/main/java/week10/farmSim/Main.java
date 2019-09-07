@@ -1,24 +1,29 @@
 package week10.farmSim;
 
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String... args) {
-        MilkingRobot milkingRobot = new MilkingRobot();
-        Cow cow = new Cow();
-        BulkTank tank = new BulkTank();
-        milkingRobot.setBulkTank(tank);
-        System.out.println("Bulk tank: " + milkingRobot.getBulkTank());
+        Barn barn = new Barn(new BulkTank());
+        System.out.println(barn);
 
-        for (int i = 0; i < 2; i++) {
-            System.out.println(cow); // name amount/capacity
-            System.out.println("Living..");
-            for(int j = 0; j < 5; j++) {
-                cow.liveHour(); // do 5 milking sessions
-            }
-            System.out.println(cow); // name amount/capacity
-        }
+        MilkingRobot robot = new MilkingRobot();
+        barn.installMilkingRobot(robot);
 
-        System.out.println("Milking...");
-        milkingRobot.milk(cow);
-        System.out.println("Bulk tank: " + tank);
+        Cow ammu = new Cow("Ammu");
+        ammu.liveHour();
+        ammu.liveHour();
+
+        barn.takeCareOf(ammu);
+        System.out.println(barn);
+
+        LinkedList<Cow> cowList = new LinkedList<>();
+        cowList.add(ammu);
+        cowList.add(new Cow());
+
+        cowList.forEach(Cow::liveHour);
+
+        barn.takeCareOf(cowList);
+        System.out.println(barn);
     }
 }
