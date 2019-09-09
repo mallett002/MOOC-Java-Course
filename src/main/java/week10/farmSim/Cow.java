@@ -44,8 +44,8 @@ public class Cow implements Milkable, Alive {
     @Override
     public void liveHour() {
         // produces between 0.7 - 2.0 li milk/hr
-        double milkSession = ThreadLocalRandom.current().nextDouble(0.7, 2.0);
-        double possibleNewMilkAmount = milkSession + this.milkAmount;
+        double sessionAmount = ThreadLocalRandom.current().nextDouble(0.7, 2.0);
+        double possibleNewMilkAmount = sessionAmount + this.milkAmount;
 
         if (possibleNewMilkAmount <= udderCapacity) {
             this.milkAmount = possibleNewMilkAmount;
@@ -62,7 +62,8 @@ public class Cow implements Milkable, Alive {
 
     @Override
     public String toString() {
-        return this.cowName + " " +
+        return "    " +
+                this.cowName + " " +
                 String.format("%.2f", this.milkAmount) +
                 "/" +
                 String.format("%.2f", this.udderCapacity);

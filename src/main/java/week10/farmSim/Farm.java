@@ -34,6 +34,10 @@ public class Farm implements Alive {
         this.barn.takeCareOf(this.cows);
     }
 
+    public void installMilkingRobot(MilkingRobot robot) {
+        this.barn.installMilkingRobot(robot);
+    }
+
     public String animals() {
         if (this.cows.size() == 0) {
             return "No cows";
