@@ -12,11 +12,11 @@ public class MilkingRobot {
     }
 
     public void milk(Milkable cow) {
-        try {
+        if (this.bulkTank == null) {
+            throw new IllegalStateException("No bulk tank connected");
+        } else {
             // add the milk from the cow to the bulk tank
             this.bulkTank.addToTank(cow.milk());
-        } catch(Exception e) {
-            throw new IllegalStateException("No bulk tank connected");
         }
     }
 }

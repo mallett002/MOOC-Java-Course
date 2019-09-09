@@ -4,28 +4,13 @@ import java.util.LinkedList;
 
 public class Main {
     public static void main(String... args) {
-        Barn barn = new Barn(new BulkTank());
-        System.out.println(barn);
+        Farm farm = new Farm("Esko", new Barn(new BulkTank()));
 
-        MilkingRobot robot = new MilkingRobot();
-        barn.installMilkingRobot(robot);
+        farm.addCow(new Cow());
+        farm.addCow(new Cow());
+        farm.addCow(new Cow());
 
-        Cow ammu = new Cow("Ammu");
-        ammu.liveHour();
-        ammu.liveHour();
-
-        barn.takeCareOf(ammu);
-        System.out.println(barn);
-
-        LinkedList<Cow> cowList = new LinkedList<>();
-        cowList.add(ammu);
-        cowList.add(new Cow());
-
-        cowList.forEach(Cow::liveHour);
-
-        barn.takeCareOf(cowList);
-        System.out.println(barn);
-
-//        Exercise 31.5: Farm
+        System.out.println(farm);
+        // Fix formatting of printing cows (need indented)
     }
 }
