@@ -36,7 +36,7 @@ public class UserInterface {
     private void printOperations() {
         System.out.println("\t0: Quit");
         for (int i = 0; i < this.operations.size(); i++) {
-            String operationName = this.operations.get(i).getName(); // Get the operation name
+            String operationName = this.operations.get(i).getName();
             System.out.println("\t" + (i + 1) + ": " + operationName);
         }
     }
