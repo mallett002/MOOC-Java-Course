@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserInterface {
+class UserInterface {
 
     private Scanner reader;
     private List<Operation> operations;
 
-    public UserInterface(Scanner reader) {
+    UserInterface(Scanner reader) {
         this.reader = reader;
         this.operations = new ArrayList<>();
     }
 
-    public void addOperation(Operation operation) {
-        this.operations.add(operation); // Anything that extends "Operation"
+    void addOperation(Operation operation) {
+        this.operations.add(operation);
     }
 
-    public void start() {
+    void start() {
         while (true) {
             printOperations();
             System.out.print("Choice: ");
