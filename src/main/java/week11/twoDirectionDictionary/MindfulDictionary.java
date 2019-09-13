@@ -1,7 +1,6 @@
 package week11.twoDirectionDictionary;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,13 +65,17 @@ public class MindfulDictionary {
         if (this.dictionary.containsKey(word)) {
             this.dictionary.remove(word);
         } else if (this.dictionary.containsValue(word)) {
-            String key = "";
+//            String key = "";
+//
+//            for (String possibleKey : this.dictionary.keySet()) {
+//                if (this.dictionary.get(possibleKey).equals(word)) {
+//                    key = possibleKey;
+//                }
+//            }
 
-            for (String possibleKey : this.dictionary.keySet()) {
-                if (this.dictionary.get(possibleKey).equals(word)) {
-                    key = possibleKey;
-                }
-            }
+            String key = this.dictionary.keySet().stream()
+                    .filter(keyWord -> this.dictionary.get(keyWord).equals(word))
+                    .toString();
 
             this.dictionary.remove(key);
         }
