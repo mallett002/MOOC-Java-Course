@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MindfulDictionary {
 
@@ -83,15 +84,19 @@ public class MindfulDictionary {
         }
 
         if (this.dictionary.containsValue(word)) {
-            String key = "";
+//            String key = "";
+//
+//            for (String possibleKey : this.dictionary.keySet()) {
+//                if (this.dictionary.get(possibleKey).equals(word)) {
+//                    key = possibleKey;
+//                }
+//            }
+//
+//            return key;
 
-            for (String possibleKey : this.dictionary.keySet()) {
-                if (this.dictionary.get(possibleKey).equals(word)) {
-                    key = possibleKey;
-                }
-            }
-
-            return key;
+            return this.dictionary.keySet().stream()
+                    .filter(key -> this.dictionary.get(key).equals(word))
+                    .collect(Collectors.joining(""));
         }
 
         return null;
