@@ -17,10 +17,12 @@ public class MindfulDictionary {
     }
 
     public MindfulDictionary(String file) {
+        this();
         this.file = file;
     }
 
-    public boolean load() throws FileNotFoundException {
+    // Reads lines and puts them in "this.dictionary" HashMap
+    public boolean load() {
         try {
             File fyle = new File(this.file);
             Scanner reader = new Scanner(fyle);
@@ -33,6 +35,22 @@ public class MindfulDictionary {
 
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean save() {
+        try {
+            FileWriter writer = new FileWriter(this.file);
+
+            for (String finishWord : this.dictionary.keySet()) {
+                writer.write(this.dictionary.get(finishWord) + ":" + finishWord);
+                writer.write("\n");
+            }
+
+            writer.close();
+            return true;
+        } catch(Exception e) {
             return false;
         }
     }
