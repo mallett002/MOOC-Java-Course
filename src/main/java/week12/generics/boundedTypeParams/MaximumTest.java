@@ -1,7 +1,5 @@
 package week12.generics.boundedTypeParams;
 
-import java.util.List;
-
 // Determines the largest of three Comparable objects
 public class MaximumTest {
 
@@ -27,7 +25,7 @@ public class MaximumTest {
     // This will throw error bc List<Building> isn't superType of List<House>:
     /*
     public static void paintBuildings(List<Building> buildings) {
-        buildings.forEach(Building::paint);
+        buildings.forEach(Building::paint); // Error: paint belongs to House class
     }
     */
 

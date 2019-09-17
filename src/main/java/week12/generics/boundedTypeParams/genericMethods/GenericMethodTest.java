@@ -1,4 +1,4 @@
-package week12.generics.genericMethods;
+package week12.generics.boundedTypeParams.genericMethods;
 
 // Generic Methods
 // Has a type parameter < E > for use inside method for generic types

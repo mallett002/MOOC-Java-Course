@@ -1,4 +1,4 @@
-package week12.generics.genericClasses;
+package week12.generics.boundedTypeParams.genericClasses;
 
 // <T> specifies it takes a generic type
 public class Box<T> {
