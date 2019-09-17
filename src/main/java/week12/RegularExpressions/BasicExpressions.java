@@ -55,7 +55,6 @@ public class BasicExpressions {
         // + is 1 or more (plus)
 //        usePlus();
 
-
         // ? is 0 or 1 (question)
 //        useQuestionMark();
 
@@ -69,73 +68,60 @@ public class BasicExpressions {
 //        atLeastNTimes();
 
         // multiple reps in one regex
-        multiple();
+//        multiple();
+
+        // Square brackets: [0-9] zero through nine & [a-z] "a" to "z"
+        squareBrackets();
+    }
+
+    public static void print(String regex, String str) {
+        if (str.matches(regex)) {
+            System.out.println("The form is right.");
+        } else {
+            System.out.println("The form is wrong.");
+        }
     }
 
     public static void useStar() {
         String string = "trololololololo";
         String regex = "trolo(lo)*";
 
-        if (string.matches(regex)) {
-            System.out.println("The form is right!");
-        } else {
-            System.out.println("Wrong!");
-        }
+        print(regex, string);
     }
 
     public static void usePlus() {
         String str = "trolololololo";
         String regex = "tro(lo)+"; // one or more times
 
-        if (str.matches(regex)) {
-            System.out.println("The form is right.");
-        } else {
-            System.out.println("The form is wrong.");
-        }
+        print(regex, str);
     }
 
     public static void useQuestionMark() {
         String string = "You have accidentally the whole name";
         String regex = "You have accidentally (deleted )?the whole name"; // can have (deleted ) or not
 
-        if (string.matches(regex)) {
-            System.out.println("The form is right.");
-        } else {
-            System.out.println("The form is wrong.");
-        }
+        print(regex, string);
     }
 
     public static void useNTimes() {
         String str = "1010";
         String regex = "(10){2}"; // 10 exactly 2 times
 
-        if (str.matches(regex)) {
-            System.out.println("The form is right.");
-        } else {
-            System.out.println("The form is wrong.");
-        }
+        print(regex, str);
     }
 
     public static void fromAToBTimes() {
         String str = "1";
         String regex = "1{2,4}"; // "1" at least twice, up to four times
 
-        if (str.matches(regex)) {
-            System.out.println("The form is right.");
-        } else {
-            System.out.println("The form is wrong.");
-        }
+        print(regex, str);
     }
 
     public static void atLeastNTimes() {
         String str = "1111";
         String regex = "1{2,}";
 
-        if (str.matches(regex)) {
-            System.out.println("The form is right.");
-        } else {
-            System.out.println("The form is wrong.");
-        }
+        print(regex, str);
     }
 
     public static void multiple() {
@@ -143,14 +129,13 @@ public class BasicExpressions {
         // String that starts and ends with three fives with 0's and 1's in between
         String regex = "5{3}(0|1)*5{3}";
 
-        if (str.matches(regex)) {
-            System.out.println("The form is right.");
-        } else {
-            System.out.println("The form is wrong.");
-        }
+        print(regex, str);
     }
 
     public static void squareBrackets() {
+        String str = "0-139";
+        String regex = "0-1[2-5]9";
 
+        print(regex, str);
     }
 }
