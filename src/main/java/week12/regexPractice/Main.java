@@ -10,21 +10,22 @@ public class Main {
         // Week Days
         System.out.print("Give a day abbreviation: ");
         boolean isDay = isAWeekDay(reader.nextLine());
-        System.out.println(isDay);
+        printForm(isDay);
     }
 
-    public static boolean isAWeekDay(String str) {
+    private static void printForm(boolean isValid) {
+        if (isValid) {
+            System.out.println("The form is fine");
+        } else {
+            System.out.println("The form is wrong");
+        }
+    }
+
+    private static boolean isAWeekDay(String str) {
         String[] days = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
 
-        // Todo: use stream
-//        for (String day : days) {
-//            if (str.matches(day)) return true;
-//        }
-//        return false;
-        boolean isDay = Arrays.stream(days)
-                .reduce(false, (dayOne, dayTwo) -> {
-
-                });
+        return Arrays.stream(days)
+                .anyMatch(str::matches);
 
     }
 }

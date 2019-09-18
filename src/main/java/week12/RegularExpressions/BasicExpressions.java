@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class BasicExpressions {
     public static void main(String[] args) {
-//        intro();
-//        verticalBar();
-//        groups();
+        intro();
+        verticalBar();
+        groups();
         repetitions();
     }
 
@@ -50,25 +50,25 @@ public class BasicExpressions {
 
     public static void repetitions() {
         // * is 0 or more times (star)
-//        useStar();
+        useStar();
 
         // + is 1 or more (plus)
-//        usePlus();
+        usePlus();
 
         // ? is 0 or 1 (question)
-//        useQuestionMark();
+        useQuestionMark();
 
         // {n} is number of "n" times
-//        useNTimes();
+        useNTimes();
 
         // {a, b} is from a to b times
-//        fromAToBTimes();
+        fromAToBTimes();
 
         // {n,} at least n times
-//        atLeastNTimes();
+        atLeastNTimes();
 
         // multiple reps in one regex
-//        multiple();
+        multiple();
 
         // Square brackets: [0-9] zero through nine & [a-z] "a" to "z"
         squareBrackets();
@@ -84,7 +84,7 @@ public class BasicExpressions {
 
     public static void useStar() {
         String string = "trololololololo";
-        String regex = "trolo(lo)*";
+        String regex = "trolo(lo)*"; // zero or more
 
         print(regex, string);
     }
@@ -134,7 +134,7 @@ public class BasicExpressions {
 
     public static void squareBrackets() {
         String str = "0-139";
-        String regex = "0-1[2-5]9";
+        String regex = "0-1[2-5]9"; // 2 through 5
 
         print(regex, str);
     }
