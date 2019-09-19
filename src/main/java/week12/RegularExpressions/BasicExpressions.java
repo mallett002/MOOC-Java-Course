@@ -70,7 +70,8 @@ public class BasicExpressions {
         // multiple reps in one regex
         multiple();
 
-        // Square brackets: [0-9] zero through nine & [a-z] "a" to "z"
+        // Square brackets: Character groups
+        // [0-9] zero through nine & [a-z] "a" to "z"
         squareBrackets();
     }
 
