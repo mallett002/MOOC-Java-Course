@@ -18,8 +18,8 @@ public class SumOfManyNumbers {
 
             sum += read;
 
-            System.out.println("Sum now: " + sum);
+            System.out.println("NumberOfParams now: " + sum);
         }
-        System.out.println("Sum in the end: " + sum);
+        System.out.println("NumberOfParams in the end: " + sum);
     }
 }

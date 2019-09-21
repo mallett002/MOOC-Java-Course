@@ -20,6 +20,6 @@ public class SumOfThreeNumbers {
         read = Integer.parseInt(reader.nextLine());
         sum += read;
 
-        System.out.println("Sum: " + sum);
+        System.out.println("NumberOfParams: " + sum);
     }
 }

@@ -20,7 +20,7 @@ public class Main {
 //        while (true) {
 //            int number = Integer.parseInt(reader.nextLine());
 //            if (number == -1) {
-//                System.out.println("Sum of your numbers is: " + stats.sum());
+//                System.out.println("NumberOfParams of your numbers is: " + stats.sum());
 //                break;
 //            } else {
 //                stats.addNumber(number);
@@ -37,7 +37,7 @@ public class Main {
         while (true) {
             int number = Integer.parseInt(reader.nextLine());
             if (number == -1) {
-                System.out.println("Sum: " + allNumbers.sum());
+                System.out.println("NumberOfParams: " + allNumbers.sum());
                 System.out.println("sum of even: " + evenNumbers.sum());
                 System.out.println("sum of odd: " + oddNumbers.sum());
                 break;

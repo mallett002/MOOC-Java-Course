@@ -17,7 +17,7 @@ public class SumOfAges {
         System.out.println("What's their age?");
         int secondAge = Integer.parseInt(reader.nextLine());
 
-        // Sum it up
+        // NumberOfParams it up
         int sum = firstAge + secondAge;
         System.out.println(you + " and " + other + " are " + sum + " years old in total!");
     }
