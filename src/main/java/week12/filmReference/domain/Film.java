@@ -1,7 +1,5 @@
 package week12.filmReference.domain;
 
-import java.util.Random;
-
 public class Film {
     private String name;
 
@@ -33,6 +31,10 @@ public class Film {
 
     @Override
     public int hashCode() {
+        if (name == null) {
+            return 7;
+        }
+
         return name.hashCode();
     }
 
