@@ -1,5 +1,7 @@
 package Streams;
 
+import week12.filmReference.domain.Person;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -147,5 +149,41 @@ public class Streams {
 
         System.out.println(summary);
         // -> IntSummaryStatistics{count=7, sum=203, min=2, average=29.000000, max=88}
+    }
+
+    // Peek method (Like forEach but not a terminal operator)
+    public List<Object> usePeek(Object[] arrayOfEmps) {
+        // turn into a List
+        List<Object> empList = Arrays.asList(arrayOfEmps);
+
+        return empList.stream()
+                .peek(Object::notifyAll)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+    }
+
+    // Sorted method in stream
+    public List<Person> useSorted(List<Person> people) {
+        return people.stream()
+                .sorted(Comparator.comparing(Person::getName)) // or .sorted((a, b) -> a.getName().compareTo(b.getName()))
+                .collect(Collectors.toList());
+    }
+
+    // allMatch() true if all match the predicate
+    public boolean allAreEven(List<Integer> ints) {
+        return ints.stream()
+            .allMatch(n -> n % 2 == 0);
+    }
+
+    // anyMatch() true if any match given predicate
+    public boolean atLeastOneEven(List<Integer> ints) {
+        return ints.stream()
+                .anyMatch(n -> n % 2 == 0);
+    }
+
+    // noneMatch() true if none match given predicate
+    public boolean noneAreEven(List<Integer> ints) {
+        return ints.stream()
+                .noneMatch(n -> n % 2 == 0);
     }
 }
