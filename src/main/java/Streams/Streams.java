@@ -184,6 +184,16 @@ public class Streams {
     // noneMatch() true if none match given predicate
     public boolean noneAreEven(List<Integer> ints) {
         return ints.stream()
-                .noneMatch(n -> n % 2 == 0);
+                .noneMatch(n -> n % 2 == 0); // if one does, it's false
+    }
+
+    // Stream Specializations: IntStream, LongStream, and DoubleStream
+    public void usingMapToInt() {
+        List<String> list = Arrays.asList("5", "7", "99", "27");
+
+        Integer largest = list.stream()
+                .mapToInt(Integer::parseInt) // mapToInt turns into an IntStream
+                .max() // so we can use .max()
+                .orElseThrow(NoSuchElementException::new);
     }
 }
