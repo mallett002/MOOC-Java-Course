@@ -151,6 +151,8 @@ public class Streams {
         // -> IntSummaryStatistics{count=7, sum=203, min=2, average=29.000000, max=88}
     }
 
+    /* ***More About Streams*** --------------------------------------------------------------------------------------*/
+
     // Peek method (Like forEach but not a terminal operator)
     public List<Object> usePeek(Object[] arrayOfEmps) {
         // turn into a List
@@ -187,7 +189,7 @@ public class Streams {
                 .noneMatch(n -> n % 2 == 0); // if one does, it's false
     }
 
-    // Stream Specializations: IntStream, LongStream, and DoubleStream
+    // Stream Specializations: IntStream, LongStream, and DoubleStream--------------------------------------------------
     public void usingMapToInt() {
         List<String> list = Arrays.asList("5", "7", "99", "27");
 
@@ -195,5 +197,28 @@ public class Streams {
                 .mapToInt(Integer::parseInt) // mapToInt turns into an IntStream
                 .max() // so we can use .max()
                 .orElseThrow(NoSuchElementException::new);
+    }
+
+    // Specialized operations for dealing with IntStreams, LongStreams, and DoubleStreams
+    // sum(), average() and range()
+
+    public static double getAverage(List<String> strs) {
+        return strs.stream()
+                .mapToDouble(Double::parseDouble)
+                .average()
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    // Reduce for sum
+    public static double reduceForSum(List<Integer> ints) {
+        return ints.stream()
+                .mapToDouble(n -> (double) n) // Cast to a double since needs to return double
+                .reduce(0.0, Double::sum);
+    }
+
+    // Building up a String with Collectors.joining()
+    public static String getNamesAsString(String[] names) {
+        return Arrays.asList(names).stream()
+                .collect(Collectors.joining("\n")); // joins them with a ", "
     }
 }
