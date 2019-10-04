@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        RatingRegister ratings = new RatingRegister();
+        RatingRegister ratingRegister = new RatingRegister();
 
         Film goneWithTheWind = new Film("Gone with the Wind");
         Film theBridgesOfMadisonCounty = new Film("The Bridges of Madison County");
@@ -19,14 +19,20 @@ public class Main {
         Person pekka = new Person("Pekka");
         Person mikke = new Person("Mikke");
 
-        ratings.addRating(matti, goneWithTheWind, Rating.BAD);
-        ratings.addRating(matti, theBridgesOfMadisonCounty, Rating.GOOD);
-        ratings.addRating(matti, eraserhead, Rating.FINE);
+        ratingRegister.addRating(matti, goneWithTheWind, Rating.BAD);
+        ratingRegister.addRating(matti, theBridgesOfMadisonCounty, Rating.GOOD);
+        ratingRegister.addRating(matti, eraserhead, Rating.FINE);
 
-        ratings.addRating(pekka, goneWithTheWind, Rating.FINE);
-        ratings.addRating(pekka, theBridgesOfMadisonCounty, Rating.BAD);
-        ratings.addRating(pekka, eraserhead, Rating.MEDIOCRE);
+        ratingRegister.addRating(pekka, goneWithTheWind, Rating.FINE);
+        ratingRegister.addRating(pekka, theBridgesOfMadisonCounty, Rating.BAD);
+        ratingRegister.addRating(pekka, eraserhead, Rating.MEDIOCRE);
 
-        ratings.addRating(mikke, eraserhead, Rating.BAD);
+        Reference reference = new Reference(ratingRegister);
+
+        Film recommendedMike = reference.recommendFilm(mikke);
+        System.out.println("The film recommended to Michael is: " + recommendedMike);
+
+        Film recommendedMatti = reference.recommendFilm(matti);
+        System.out.println("The film recommended to Matti is: " + recommendedMatti);
     }
 }

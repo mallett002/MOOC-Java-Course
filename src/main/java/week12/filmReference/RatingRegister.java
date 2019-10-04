@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class RatingRegister {
-    Map<Film, List<Rating>> films;
-    Map<Person, Map<Film, Rating>> personRatings;
+    private Map<Film, List<Rating>> films;
+    private Map<Person, Map<Film, Rating>> personRatings;
 
     public RatingRegister() {
         this.films = new HashMap<>();
