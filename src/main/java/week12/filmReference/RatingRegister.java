@@ -29,16 +29,15 @@ public class RatingRegister {
     }
 
     public void addRating(Person person, Film film, Rating rating) {
+        // Add rating for all films
         this.addRating(film, rating);
 
-        // adds rating of film to person
+        // Add rating for persons list of ratings
         if (!personRatings.containsKey(person)) {
             personRatings.put(person, new HashMap<>());
         }
 
-        Map<Film, Rating> ratingForPerson = new HashMap<>();
-        ratingForPerson.put(film, rating);
-        personRatings.put(person, ratingForPerson);
+        personRatings.get(person).put(film, rating);
     }
 
     public Rating getRating(Person person, Film film) {
