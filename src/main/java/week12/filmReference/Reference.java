@@ -15,69 +15,92 @@ public class Reference {
         this.register = register;
     }
 
-    // movie taste score = (p1Movie1Rating * p2Movie1Rating) + (p1Movie2Rating) + (p2Movie2Rating);
-    // Get movie taste score with others. Find highest. Get that persons highest rated
-    private int getPreferenceScoreForMovie(Person p1, Person p2, Film film) {
-        int ratingP1 = register.getRating(p1, film).getValue();
-        int ratingP2 = register.getRating(p2, film).getValue();
-        return ratingP1 * ratingP2;
+    private Map<Person, Integer> getPreferenceScores(Person person) {
+        Map<Person, Integer> preferenceScores = new HashMap<>();
+        List<Person> reviewers = register.reviewers();
+
+        for (Person reviewer : reviewers) {
+            Set<Film> reviewerFilms = register.getPersonalRatings(reviewer).keySet();
+            int sum = 0;
+
+            for (Film film : register.getPersonalRatings(person).keySet()) {
+                if (reviewerFilms.contains(film)) {
+                    int personRating = register.getRating(person, film).getValue();
+                    int reviewerRating = register.getRating(reviewer, film).getValue();
+                    sum += (personRating * reviewerRating);
+                }
+            }
+
+            preferenceScores.put(reviewer, sum);
+        }
+
+        return preferenceScores;
     }
 
-    // Return null if:
-        // Can't find film to recommend: If find that best film is neutral or below
+    Person getPersonwithBestScore(Map<Person, Integer> preferenceScores) {
+        Person highest;
+        int highestVal = Integer.MIN_VALUE;
+
+        for (Person person : preferenceScores.keySet()) {
+            if (preferenceScores.get(person) > highestVal) {
+                highest = person;
+            }
+        }
+
+        return highest;
+    }
+
+    Film getHighestRating(Person person) {
+        Film highestRatedFilm;
+        int highestRating = Integer.MIN_VALUE;
+        Map<Film, Rating> personsRatings = register.getPersonalRatings(person);
+
+        for (Film film : personsRatings.keySet()) {
+            if (personsRatings.get(film).getValue() > highestRating) {
+                highestRatedFilm = film;
+            }
+        }
+
+        return highestRatedFilm;
+    }
+
+    // look at others film ratings
+    // Generate a preferenceScore with person
+    // get person with highest preferenceScore with person
+    // if that persons highest rated movie is above 0 (Neutral or above) return that movie
+    // else return null;
+
     public Film recommendIntelligently(Person person) {
-        // look at others film ratings
-        // Generate a preferenceScore with person
-        // get person with highest preferenceScore with person
-        // if that persons highest rated movie is above 0 (Neutral or above) return that movie
-            // else return null;
-        Map<Person, Integer> preferenceScores = new HashMap<>();
         Map<Film, Rating> personsRatings = register.getPersonalRatings(person);
         List<Person> reviewers = register.reviewers();
 
-        // Build up preferenceScores
-        reviewers.stream()
-            .filter(p -> p != person)
-            .forEach(otherPerson -> {
-                Map<Film, Rating> othersRatings = register.getPersonalRatings(otherPerson);
-                // look through movies. if both reviewed, get score. else 0
-                personsRatings.keySet().stream()
-                    .filter(film -> othersRatings.containsKey(film))
-                    .forEach(film -> {
-                        preferenceScores.put(otherPerson, getPreferenceScoreForMovie(person, otherPerson, film));
-                    });
-            });
+        Map<Person, Integer> preferenceScores = getPreferenceScores(person);
 
-        // TODO: this thing...
-        // Get person with highest preferenceScore
-        // Return highest rated film of that person, if is rated higher than 0 (Neutral or above)
-        preferenceScores.keySet().stream()
+        // Get person with highest score
+        Person personWithHighestScore = getPersonwithBestScore(preferenceScores);
 
+        // Get that person's highest rated movie
+        Film bestRatedFilmForPerson = getHighestRatedFilm(personWithHighestScore);
+
+        int bestRatedFilmValue = register.getRating(personWithHighestScore, bestRatedFilmForPerson).getValue();
+
+        return bestRatedFilmValue > 0 ? bestRatedFilmForPerson : null;
     }
 
-    public Film recommendFilm(Person person) {
-        // If person hasn't evaluated a film, get highest rated, otherwise get highest rated other than theirs
-
-        // Make list of films and sort according to ratings, highest first
+    Film getHighestRatedFilm(Person person) {
         Map<Film, List<Rating>> filmRatings = register.filmRatings();
         FilmComparator filmComparator = new FilmComparator(filmRatings);
 
         List<Film> films = register.filmRatings().keySet().stream().collect(Collectors.toList());
         Collections.sort(films, filmComparator);
+        return films.get(0);
+    }
 
-        // if the person has rated a movie, get highest recommendation other than their current rating
+    public Film recommendFilm(Person person) {
         if (register.reviewers().contains(person)) {
-            Film personsRatedFilm = register.getPersonalRatings(person).keySet().stream()
-                    .findFirst().orElse(null);
-
-            // look at films other than "personsRatedFilm" and get the one with highest rating
-            return films.stream()
-                    .filter(film -> film != personsRatedFilm)
-                    .findFirst()
-                    .get();
+            return recommendIntelligently(person);
         } else {
-            return films.get(0);
+            return getHighestRatedFilm(person);
         }
-
     }
 }
