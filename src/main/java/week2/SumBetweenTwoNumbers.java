@@ -17,6 +17,6 @@ public class SumBetweenTwoNumbers {
             sum += addend;
             addend++;
         }
-        System.out.println("Sum: " + sum);
+        System.out.println("NumberOfParams: " + sum);
     }
 }

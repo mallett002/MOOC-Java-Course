@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -100,6 +101,16 @@ public class MindfulDictionary {
             return this.dictionary.keySet().stream()
                     .filter(key -> this.dictionary.get(key).equals(word))
                     .collect(Collectors.joining(""));
+        }
+
+        return null;
+    }
+
+    public <K, V> K getKeyByValue(Map<K, V> map, V value) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            if (value.equals(entry.getValue())) {
+                return entry.getKey();
+            }
         }
 
         return null;

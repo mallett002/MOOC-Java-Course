@@ -8,13 +8,13 @@ public class SumSetOfNums {
         int sum = 0;
         int addend = 1;
 
-        System.out.print("Sum up to which number? ");
+        System.out.print("NumberOfParams up to which number? ");
         int stopper = Integer.parseInt(reader.nextLine());
 
         while (addend <= stopper) {
             sum += addend;
             addend++;
         }
-        System.out.println("Sum is " + sum);
+        System.out.println("NumberOfParams is " + sum);
     }
 }

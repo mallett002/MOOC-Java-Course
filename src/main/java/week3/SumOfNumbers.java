@@ -7,6 +7,6 @@ public class SumOfNumbers {
 
     public static void main(String... args) {
         int answer = sum(4, 3, 6, 1);
-        System.out.println("Sum: " + answer);
+        System.out.println("NumberOfParams: " + answer);
     }
 }
