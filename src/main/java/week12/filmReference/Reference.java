@@ -20,38 +20,43 @@ public class Reference {
         List<Person> reviewers = register.reviewers();
 
         for (Person reviewer : reviewers) {
-            Set<Film> reviewerFilms = register.getPersonalRatings(reviewer).keySet();
-            int sum = 0;
+            if (reviewer != person) {
+                Set<Film> reviewerFilms = register.getPersonalRatings(reviewer).keySet();
+                int sum = 0;
 
-            for (Film film : register.getPersonalRatings(person).keySet()) {
-                if (reviewerFilms.contains(film)) {
-                    int personRating = register.getRating(person, film).getValue();
-                    int reviewerRating = register.getRating(reviewer, film).getValue();
-                    sum += (personRating * reviewerRating);
+                for (Film film : register.getPersonalRatings(person).keySet()) {
+                    if (reviewerFilms.contains(film)) {
+                        int personRating = register.getRating(person, film).getValue();
+                        int reviewerRating = register.getRating(reviewer, film).getValue();
+                        sum += (personRating * reviewerRating);
+                    }
                 }
-            }
 
-            preferenceScores.put(reviewer, sum);
+                preferenceScores.put(reviewer, sum);
+            }
         }
 
         return preferenceScores;
     }
 
-    Person getPersonwithBestScore(Map<Person, Integer> preferenceScores) {
-        Person highest;
+    private Person getPersonWithBestScore(Map<Person, Integer> preferenceScores) {
+        Person firstPerson = preferenceScores.keySet().stream().findFirst().orElse(null);
+        Person highestRatedPerson = firstPerson;
         int highestVal = Integer.MIN_VALUE;
 
         for (Person person : preferenceScores.keySet()) {
             if (preferenceScores.get(person) > highestVal) {
-                highest = person;
+                highestRatedPerson = person;
+                highestVal = preferenceScores.get(person);
             }
         }
 
-        return highest;
+        return highestRatedPerson;
     }
 
-    Film getHighestRating(Person person) {
-        Film highestRatedFilm;
+    private Film getHighestRating(Person person) {
+        Film firstFilm = register.filmRatings().keySet().stream().findFirst().orElse(null);
+        Film highestRatedFilm = firstFilm;
         int highestRating = Integer.MIN_VALUE;
         Map<Film, Rating> personsRatings = register.getPersonalRatings(person);
 
@@ -64,30 +69,35 @@ public class Reference {
         return highestRatedFilm;
     }
 
-    // look at others film ratings
-    // Generate a preferenceScore with person
-    // get person with highest preferenceScore with person
-    // if that persons highest rated movie is above 0 (Neutral or above) return that movie
-    // else return null;
-
     public Film recommendIntelligently(Person person) {
-        Map<Film, Rating> personsRatings = register.getPersonalRatings(person);
-        List<Person> reviewers = register.reviewers();
-
         Map<Person, Integer> preferenceScores = getPreferenceScores(person);
 
-        // Get person with highest score
-        Person personWithHighestScore = getPersonwithBestScore(preferenceScores);
+        Person personWithHighestScore = getPersonWithBestScore(preferenceScores);
 
-        // Get that person's highest rated movie
-        Film bestRatedFilmForPerson = getHighestRatedFilm(personWithHighestScore);
+        Film bestRatedFilmForPerson = getHighestRatedFilmForPerson(personWithHighestScore, person);
 
         int bestRatedFilmValue = register.getRating(personWithHighestScore, bestRatedFilmForPerson).getValue();
 
         return bestRatedFilmValue > 0 ? bestRatedFilmForPerson : null;
     }
 
-    Film getHighestRatedFilm(Person person) {
+    Film getHighestRatedFilmForPerson(Person otherPerson, Person person) {
+        Set<Film> personRatings = register.getPersonalRatings(person).keySet();
+        Map<Film, Rating> otherPersonRatings = register.getPersonalRatings(otherPerson);
+        Film highestRatedFilm = otherPersonRatings.keySet().stream().findFirst().orElse(null);
+        int currentHighestRating = Integer.MIN_VALUE;
+
+        for (Film film : otherPersonRatings.keySet()) {
+            if (otherPersonRatings.get(film).getValue() > currentHighestRating && !personRatings.contains(film)) {
+                highestRatedFilm = film;
+                currentHighestRating = otherPersonRatings.get(film).getValue();
+            }
+        }
+
+        return highestRatedFilm;
+    }
+
+    private Film getHighestRatedFilm() {
         Map<Film, List<Rating>> filmRatings = register.filmRatings();
         FilmComparator filmComparator = new FilmComparator(filmRatings);
 
@@ -100,7 +110,7 @@ public class Reference {
         if (register.reviewers().contains(person)) {
             return recommendIntelligently(person);
         } else {
-            return getHighestRatedFilm(person);
+            return getHighestRatedFilm();
         }
     }
 }
